@@ -1,7 +1,9 @@
 <div>
   <div *ngIf="loading">Recupero Task Completati...</div>
   <ul *ngIf="!loading">
-    <li *ngFor="let todo of completedList">- {{ todo.title }}</li>
+    <li *ngFor="let todo of completedList; let i = index">
+      - {{ todo.title }} <span (click)="onDeleteTask(todo, i)">❌</span>
+    </li>
   </ul>
   <div *ngIf="!loading && completedList.length === 0">
     Non ci sono task completati.

@@ -9,6 +9,7 @@ import { Todo } from '../models/todo';
 export class TodosService {
   private todoList: Todo[] = [];
   private completedList: Todo[] = [];
+  private removedTask: Todo[] = [];
 
   constructor() {}
 
@@ -42,6 +43,19 @@ export class TodosService {
     return timer(1000).pipe(
       map(() => this.completedList),
       delay(1000)
+    );
+  }
+
+  deleteTask(todo: Todo, index: number): Observable<void> {
+    return of(null).pipe(
+      delay(2000),
+      map(() => {
+        todo.completed = false;
+        todo.deleted = true;
+        this.completedList.splice(index, 1);
+        this.removedTask.push(todo);
+        this.todoList = this.todoList.filter((item) => item.id !== todo.id);
+      })
     );
   }
 }

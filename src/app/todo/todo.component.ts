@@ -22,6 +22,7 @@ export class TodosComponent implements OnInit {
       id: this.todoList.length + 1,
       title: this.newTodoTitle,
       completed: false,
+      deleted: false,
     };
 
     this.todoService.addTodo(newTodo).subscribe(() => {

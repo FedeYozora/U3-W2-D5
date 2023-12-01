@@ -9,6 +9,7 @@ import { Todo } from '../models/todo';
 })
 export class CompletedComponent implements OnInit {
   completedList!: Todo[];
+  removedTask!: Todo[];
   loading = true;
 
   constructor(private todoService: TodosService) {}
@@ -22,5 +23,12 @@ export class CompletedComponent implements OnInit {
       this.completedList = completedTodos;
       this.loading = false;
     });
+  }
+
+  onDeleteTask(todo: Todo, index: number): void {
+    this.todoService.deleteTask(todo, index).subscribe(() => {
+      this.removedTask = this.removedTask.filter((item) => item.id !== todo.id);
+    });
+    this.loadCompletedTodos();
   }
 }
