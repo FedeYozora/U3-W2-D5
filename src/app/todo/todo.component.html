@@ -1,0 +1,22 @@
+<div class="verticalRow">
+  <div *ngIf="loading">Recupero Task...</div>
+  <ul *ngIf="!loading" class="listTask">
+    <li *ngFor="let todo of todoList">
+      - {{ todo.title }}
+      <span (click)="CompleteTaskClick(todo)">✅</span>
+    </li>
+  </ul>
+  <div *ngIf="!loading && todoList.length === 0" class="noTask">
+    Ops, non ci sono Task.
+  </div>
+  <div class="form">
+    <form (submit)="addTodo()">
+      <input
+        [(ngModel)]="newTodoTitle"
+        name="nomeTask"
+        placeholder="Aggiungi un nuovo Task!"
+      />
+      <button type="submit">+</button>
+    </form>
+  </div>
+</div>
