@@ -46,12 +46,22 @@ export class TodosService {
     );
   }
 
-  deleteTask(todo: Todo, index: number): Observable<void> {
+  deleteTodoTask(todo: Todo, index: number): Observable<void> {
     return of(null).pipe(
       delay(2000),
       map(() => {
         todo.deleted = true;
         this.todoList.splice(index, 1);
+        this.removedTask.push(todo);
+        this.todoList = this.todoList.filter((item) => item.id !== todo.id);
+      })
+    );
+  }
+  deleteCompleteTask(todo: Todo, index: number): Observable<void> {
+    return of(null).pipe(
+      delay(2000),
+      map(() => {
+        todo.deleted = true;
         this.completedList.splice(index, 1);
         this.removedTask.push(todo);
         this.todoList = this.todoList.filter((item) => item.id !== todo.id);

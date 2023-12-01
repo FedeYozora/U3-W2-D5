@@ -38,7 +38,7 @@ export class TodosComponent implements OnInit {
   }
 
   onDeleteTask(todo: Todo, index: number): void {
-    this.todoService.deleteTask(todo, index).subscribe(() => {
+    this.todoService.deleteTodoTask(todo, index).subscribe(() => {
       this.removedTask = this.removedTask.filter((item) => item.id !== todo.id);
     });
     this.loadTodos();

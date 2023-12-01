@@ -26,7 +26,7 @@ export class CompletedComponent implements OnInit {
   }
 
   onDeleteTask(todo: Todo, index: number): void {
-    this.todoService.deleteTask(todo, index).subscribe(() => {
+    this.todoService.deleteCompleteTask(todo, index).subscribe(() => {
       this.removedTask = this.removedTask.filter((item) => item.id !== todo.id);
     });
     this.loadCompletedTodos();
