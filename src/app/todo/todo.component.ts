@@ -9,6 +9,7 @@ import { Todo } from '../models/todo';
 })
 export class TodosComponent implements OnInit {
   todoList!: Todo[];
+  removedTask!: Todo[];
   newTodoTitle: string = '';
   loading = true;
 
@@ -34,6 +35,13 @@ export class TodosComponent implements OnInit {
     this.todoService.CompleteTask(todo).subscribe(() => {
       this.loadTodos();
     });
+  }
+
+  onDeleteTask(todo: Todo, index: number): void {
+    this.todoService.deleteTask(todo, index).subscribe(() => {
+      this.removedTask = this.removedTask.filter((item) => item.id !== todo.id);
+    });
+    this.loadTodos();
   }
 
   private loadTodos() {

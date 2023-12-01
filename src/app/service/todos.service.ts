@@ -50,8 +50,8 @@ export class TodosService {
     return of(null).pipe(
       delay(2000),
       map(() => {
-        todo.completed = false;
         todo.deleted = true;
+        this.todoList.splice(index, 1);
         this.completedList.splice(index, 1);
         this.removedTask.push(todo);
         this.todoList = this.todoList.filter((item) => item.id !== todo.id);
